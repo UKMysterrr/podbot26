@@ -1,3 +1,8 @@
+# POD-Bot 2.6 (Modified with the help of AI, for personal use.)
+## A fork of POD-Bot 2.6, modified to be recompiled using VC++6 on a Win98 Installation, for use on an offline Win98 install of CS 1.6.
+### And yes, im going to be stupid and use AI to assist me in this matter, because I will fail to write C++ without help.
+
+# Original README.md
 POD-Bot Source released on 01/01/2003
 
 Some notes about the source-code:
