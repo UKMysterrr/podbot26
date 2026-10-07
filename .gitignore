@@ -1,0 +1,17 @@
+# Ignore the AGENTS.md file (basically just follows the rules of the original project and to be clean.)
+AGENTS.md
+
+# Ignore the HLSDK directory (this is the SDK for Half-Life, which is needed for reference but not for the actual code)
+HLSDK/
+
+# Ignore the PROGRESS.md file (this is a project progress tracker, not part of the actual code)
+PROGRESS.md
+
+# Ignore object files, executables, and build directories (these are generated during the build process and should not be tracked)
+*.o
+*.obj
+*.so
+*.so.*
+*.exe
+*.out
+build/

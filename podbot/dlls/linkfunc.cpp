@@ -5,6 +5,7 @@
 //
 
 #include "extdll.h"
+#include "bot.h"
 
 #ifndef __linux__
 extern HINSTANCE h_Library;
@@ -12,11 +13,8 @@ extern HINSTANCE h_Library;
 extern void *h_Library;
 #endif
 
-typedef void (FAR *LINK_ENTITY_FUNC)(entvars_t *);
-
-
 #define LINK_ENTITY_TO_FUNC(mapClassName, mapClassString) \
- extern "C" _declspec( dllexport ) void mapClassName( entvars_t *pev ); \
+ extern "C" EXPORT void mapClassName( entvars_t *pev ); \
  void mapClassName( entvars_t *pev ) { \
       static LINK_ENTITY_FUNC otherClassName = NULL; \
       static int skip_this = 0; \

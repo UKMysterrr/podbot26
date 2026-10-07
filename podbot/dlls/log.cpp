@@ -61,7 +61,11 @@ void add_log (const char *fmt, ...)
     FILE * fp;
 
 	va_start (va_alist, fmt);
+	#ifdef __linux__
+	vsnprintf (logbuf, sizeof(logbuf), fmt, va_alist);
+	#else
 	_vsnprintf (logbuf, sizeof(logbuf), fmt, va_alist);
+	#endif
 	va_end (va_alist);
 
 	if ( !strcmp(logbuf, szLastLogMessage) )
@@ -151,7 +155,11 @@ void report_log (int flags, const char * funcname, const char *fmt, ...)
 	{
 		va_list va_alist;
 		va_start (va_alist, fmt);
+		#ifdef __linux__
+		vsnprintf (logbuf+strlen(logbuf), sizeof(logbuf)-strlen(logbuf), fmt, va_alist);
+		#else
 		_vsnprintf (logbuf+strlen(logbuf), sizeof(logbuf)-strlen(logbuf), fmt, va_alist);
+		#endif
         logbuf[sizeof(logbuf)-1] = '\0';
 		va_end (va_alist);
 	}

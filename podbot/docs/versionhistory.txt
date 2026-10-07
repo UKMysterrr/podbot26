@@ -246,4 +246,6 @@ V2.6
 + Bots don't move in Intermission
 + Bots leave their camping/hiding position if they get hurt by
   unusual damage like drowning or gas  
-   
+
+
+V2.7 (AI Fork Begins)

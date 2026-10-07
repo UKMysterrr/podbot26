@@ -717,7 +717,11 @@ void UTIL_DebugMSG(const char *fmt, ...)
 	char msg[256];
 
 	va_start (va_alist, fmt);
+	#ifdef __linux__
+	vsnprintf (msg, sizeof(msg), fmt, va_alist);
+	#else
 	_vsnprintf (msg, sizeof(msg), fmt, va_alist);
+	#endif
 	va_end (va_alist);
 
 	UTIL_HostPrint(HUD_PRINTNOTIFY,msg);

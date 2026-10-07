@@ -9,6 +9,8 @@
 #include "bot.h"
 #include "bot_chat.h"
 
+#include <ctype.h>
+
 
 // Strips out Words between Chars like []
 inline void StripClanTags(char* pszTemp1,char* pszReturn,char* cTag1, char* cTag2)
@@ -76,6 +78,7 @@ void ConvertNameToHuman(char* pszName,char* pszReturn)
 void BotPrepareChatMessage(bot_t *pBot,char *pszText)
 {
 	int iLen;
+	int i;
 	char szNamePlaceholder[80];
 
 	memset(&pBot->szMiscStrings, 0, sizeof(pBot->szMiscStrings));
@@ -102,7 +105,7 @@ void BotPrepareChatMessage(bot_t *pBot,char *pszText)
 				int iCurrFrags;
 				int iIndex = 0;
 
-				for (int i = 0; i < gpGlobals->maxClients; i++)
+				for (i = 0; i < gpGlobals->maxClients; i++)
 				{
 					if((ThreatTab[i].IsUsed==FALSE) || (ThreatTab[i].pEdict==pBot->pEdict))
 						continue;
@@ -147,14 +150,15 @@ void BotPrepareChatMessage(bot_t *pBot,char *pszText)
 			else if(*pszPattern == 't')
 			{
 				int iTeam = UTIL_GetTeam(pBot->pEdict);
-				for (int i = 0; i < gpGlobals->maxClients; i++)
+				pTalkEdict = NULL;
+				for (i = 0; i < gpGlobals->maxClients; i++)
 				{
 					if((ThreatTab[i].IsUsed==FALSE) || (ThreatTab[i].IsAlive==FALSE) ||
 						(ThreatTab[i].iTeam!=iTeam) || (ThreatTab[i].pEdict==pBot->pEdict))
 						continue;
+					pTalkEdict = ThreatTab[i].pEdict;
 					break;
 				}
-				pTalkEdict=ThreatTab[i].pEdict;
 				if(pTalkEdict && !pTalkEdict->free)
 				{
 					ConvertNameToHuman((char*)STRING(pTalkEdict->v.netname),szNamePlaceholder);
@@ -260,7 +264,8 @@ bool BotParseChat(bot_t *pBot, char *pszReply)
 	// Copy to safe place
 	strcpy(szMessage,pBot->SaytextBuffer.szSayText);
 	// Text to uppercase for Keyword parsing
-	_strupr(szMessage);
+	for (int i = 0; szMessage[i] != 0; i++)
+		szMessage[i] = (char)toupper((unsigned char)szMessage[i]);
 
 	int iMessageLen = strlen(szMessage);
 	int i = 0;

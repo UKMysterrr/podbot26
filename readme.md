@@ -1,6 +1,36 @@
 # POD-Bot 2.6 (Modified with the help of AI, for personal use.)
-## A fork of POD-Bot 2.6, modified to be recompiled using VC++6 on a Win98 Installation, for use on an offline Win98 install of CS 1.6.
+## A fork of POD-Bot 2.6, modified, and to be recompilable using VC++6 on a Win98 Installation, for use on an offline Win98 install of CS 1.6.
 ### And yes, im going to be stupid and use AI to assist me in this matter, because I will fail to write C++ without help.
+
+## Building with CMake
+
+CMake provides modern compiler builds for the 32-bit Windows and Linux game DLLs.
+The original Visual C++ 6 project remains available at `podbot/dlls/podbot.dsw`
+for the Windows 98 compatibility build.
+
+On Linux, install a 32-bit GCC toolchain (for example, `g++-multilib` on Ubuntu),
+then configure and build:
+
+```sh
+cmake -S . -B build/linux -DCMAKE_BUILD_TYPE=Release
+cmake --build build/linux --parallel
+```
+
+The output is `build/linux/HPB_bot_i486.so`. For Debug, configure a separate build
+directory with `-DCMAKE_BUILD_TYPE=Debug`.
+
+On Windows, use a Visual Studio generator with its x86 compiler tools:
+
+```powershell
+cmake -S . -B build/windows -A Win32
+cmake --build build/windows --config Release
+```
+
+The output is `build/windows/Release/PODBot.dll`. The CMake builds do not copy the
+DLL to a game directory; install it using the target installation's existing
+POD-Bot layout. A GitHub Actions workflow is configured to compile both
+configurations on Linux and Windows and check Linux DLL architecture and engine
+entry points. It does not replace VC++6 compilation or in-game testing.
 
 # Original README.md
 POD-Bot Source released on 01/01/2003

@@ -17,10 +17,6 @@
 #include "waypoint.h"
 #include "bot_globals.h"
 
-typedef int (FAR *GETENTITYAPI)(DLL_FUNCTIONS *, int);
-// New since HL 1.1.0.4.
-typedef int (FAR *GETNEWDLLFUNCTIONS)(NEW_DLL_FUNCTIONS *, int *);
-
 extern enginefuncs_t g_engfuncs;
 extern globalvars_t  *gpGlobals;
 extern char *g_argv;
@@ -3172,7 +3168,7 @@ DLL_FUNCTIONS gFunctionTable =
 };
 
 
-extern "C" _declspec( dllexport) int GetEntityAPI( DLL_FUNCTIONS *pFunctionTable, int interfaceVersion )
+extern "C" EXPORT int GetEntityAPI( DLL_FUNCTIONS *pFunctionTable, int interfaceVersion )
 {
    // check if engine's pointer is valid and version is correct...
 
