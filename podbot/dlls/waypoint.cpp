@@ -98,7 +98,7 @@ void WaypointAddPath(edict_t *pEntity, short int add_index, short int path_index
 	   if (p->index[i] == -1)
 	   {
 		   p->index[i] = path_index;
-		   p->distance[i]=abs(fDistance);
+		   p->distance[i]=abs((int)fDistance);
 		   if (pEntity)
 		   {
 			   sprintf(msg,"Path added from %d to %d\n",add_index,path_index);
@@ -116,7 +116,7 @@ void WaypointAddPath(edict_t *pEntity, short int add_index, short int path_index
    i = 0;
    while (i < MAX_PATH_INDEX)
    {
-	   if (p->distance[i]>abs(fDistance))
+	   if (p->distance[i]>abs((int)fDistance))
 	   {
 		   if (pEntity)
 		   {
@@ -124,7 +124,7 @@ void WaypointAddPath(edict_t *pEntity, short int add_index, short int path_index
 			   ClientPrint(&pEntity->v, HUD_PRINTCONSOLE,msg);
 		   }
 		   p->index[i] = path_index;
-		   p->distance[i]=abs(fDistance);
+		   p->distance[i]=abs((int)fDistance);
 		   return;
 	   }
 	   

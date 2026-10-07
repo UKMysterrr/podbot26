@@ -121,7 +121,7 @@ void SoundSimulateUpdate(int iPlayerIndex)
 	// Uses Ladder ?
 	else if(pPlayer->v.movetype == MOVETYPE_FLY)
 	{
-		if(abs(pPlayer->v.velocity.z)>50)
+		if(abs((int)pPlayer->v.velocity.z)>50)
 		{
 			fHearDistance = 1024.0;
 			fTimeSound = gpGlobals->time + 0.3;

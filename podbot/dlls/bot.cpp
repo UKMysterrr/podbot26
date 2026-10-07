@@ -1859,7 +1859,7 @@ void BotChangePitch( bot_t *pBot, float speed )
 	ideal = pEdict->v.idealpitch;
 	
 	// find the difference in the current and ideal angle
-	diff = abs(current - ideal);
+	diff = abs((int)(current - ideal));
 	
 	// check if difference is less than the max degrees per turn
 	if (diff < speed)
@@ -1937,7 +1937,7 @@ void BotChangeYaw( bot_t *pBot, float speed )
 	ideal = pEdict->v.ideal_yaw;
 	
 	// find the difference in the current and ideal angle
-	diff = abs(current - ideal);
+	diff = abs((int)(current - ideal));
 	
 	// check if difference is less than the max degrees per turn
 	if (diff < speed)
@@ -3207,10 +3207,10 @@ void BotTurnAtWall( bot_t *pBot, TraceResult *tr )
    // D1 and D2 are the difference (in degrees) between the bot's current
    // angle and Y1 or Y2 (respectively).
 
-   D1 = abs(Y - Y1);
-   if (D1 > 179) D1 = abs(D1 - 360);
-   D2 = abs(Y - Y2);
-   if (D2 > 179) D2 = abs(D2 - 360);
+   D1 = abs((int)(Y - Y1));
+   if (D1 > 179) D1 = abs((int)(D1 - 360));
+   D2 = abs((int)(Y - Y2));
+   if (D2 > 179) D2 = abs((int)(D2 - 360));
 
    // If difference 1 (D1) is more than difference 2 (D2) then the bot will
    // have to turn LESS if it heads in direction Y1 otherwise, head in
@@ -7613,7 +7613,7 @@ void BotThink(bot_t *pBot)
 		if(pBot->f_view_distance<500.0 && pBot->bot_skill>60)
 		{
 			// Go mad !
-			pBot->f_move_speed = -abs((pBot->f_view_distance-500.0)/2);
+			pBot->f_move_speed = -abs((int)((pBot->f_view_distance-500.0)/2));
 			if(pBot->f_move_speed<-pBot->f_max_speed)
 				pBot->f_move_speed = -pBot->f_max_speed;
 			Vector v_direction;
@@ -7701,7 +7701,7 @@ void BotThink(bot_t *pBot)
 			if(pBot->iCampDirection<1)
 			{
 				v_dest.y=paths[pBot->curr_wpt_index]->fcampstarty;
-				diff = abs(pEdict->v.v_angle.y - v_dest.y);
+				diff = abs((int)(pEdict->v.v_angle.y - v_dest.y));
 				if(diff<=1)
 					pBot->iCampDirection^=1;
 				pBot->vecCamp = v_dest;
@@ -7709,7 +7709,7 @@ void BotThink(bot_t *pBot)
 			else
 			{
 				v_dest.y=paths[pBot->curr_wpt_index]->fcampendy;
-				diff = abs(pEdict->v.v_angle.y - v_dest.y);
+				diff = abs((int)(pEdict->v.v_angle.y - v_dest.y));
 				if(diff<=1)
 					pBot->iCampDirection^=1;
 				pBot->vecCamp = v_dest;
@@ -9013,7 +9013,7 @@ void BotThink(bot_t *pBot)
 
 
 	// save the previous speed (for checking if stuck)
-	pBot->prev_speed = abs(pBot->f_move_speed);
+	pBot->prev_speed = abs((int)pBot->f_move_speed);
 
 	// Reset Damage
 	pBot->iLastDamageType = -1;
