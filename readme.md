@@ -32,6 +32,19 @@ POD-Bot layout. A GitHub Actions workflow is configured to compile both
 configurations on Linux and Windows and check Linux DLL architecture and engine
 entry points. It does not replace VC++6 compilation or in-game testing.
 
+## Installation (Half-Life v1.1.1.1 WON)
+
+1. Copy the `PODBot.dll` file to your Half-Life `cstrike` directory.
+2. Ensure that the `podbot` folder containing the configuration files is also placed in the `cstrike` directory.
+3. Launch Half-Life and start a game. POD-Bot should automatically load and be available for use.
+
+## Notes
+
+- This installation guide assumes you are using the Half-Life v1.1.1.1 WON version.
+- Make sure to back up your original `cstrike` directory before copying the POD-Bot files.
+- To perform the smoketest in-game, see `smoketest.md`. (Your game must be able to run multiple instances.)
+- If you encounter any issues, refer to the original README.md section for troubleshooting and additional information.
+
 # Original README.md
 POD-Bot Source released on 01/01/2003
 
